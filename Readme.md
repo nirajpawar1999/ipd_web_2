@@ -1,21 +1,35 @@
-﻿# IPD (Browser)
+﻿# IPD (Browser) — On-device Interpupillary Distance Estimator
 
-- On-device IPD estimation using MediaPipe Face Landmarker (web).
-- f_px calibration at ~30 cm, optional personal iris size calibration.
-- Median+MAD smoothing and warnings for off-axis gaze.
+This is a browser app that measures IPD using the front camera.  
+All processing runs on the device. No video or data leaves the browser.
 
-### Run locally
-- Use any static server (camera needs https **or** `http://localhost`):
-  - `npx serve` or VS Code “Live Server”.
-- Open in Chrome/Safari, click **Enable Camera**.
+- MediaPipe Face Landmarker (web) for 478 landmarks (incl. iris).
+- f_px calibration at ~30 cm.
+- Optional personal iris size calibration.
+- Robust smoothing (median + MAD).
+- Shows IPD in pixels and centimeters.
+- Adds a fixed **+0.6 cm** to the computed IPD to match your field tests.
 
-### Deploy (GitHub Pages)
-1. Create a **public** repo, e.g. `ipd-web`.
-2. Add `index.html`, `main.js`, `README.md`.
-3. Commit & push.
-4. In **Settings → Pages**, set **Build from branch**, `main`/`root`.
-5. Open the Pages URL on your phone. Grant camera permission.
+---
 
-### Notes
-- Processing runs in-browser; no backend.
-- Model & WASM from CDNs. You may host them yourself if you prefer.
+## Live demo
+
+- GitHub Pages: **`https://<your-username>.github.io/<your-repo>/`**
+
+> Works on mobile and desktop. Use HTTPS. iOS Safari needs user interaction to start the camera.
+
+---
+
+## Quick start
+
+Clone and open with a static server:
+
+```bash
+git clone https://github.com/<your-username>/<your-repo>.git
+cd <your-repo>
+
+# Option A (Node)
+npx serve
+
+# Option B (Python 3)
+python -m http.server 8080
